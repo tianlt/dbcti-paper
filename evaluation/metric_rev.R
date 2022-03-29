@@ -1,12 +1,14 @@
+setwd('..')
 library(dynplot)
 library(tidyverse)
 library(dynwrap)
+library(dbcti)
 
 
-simulated_data_tool <- readRDS('simulated_data_tool.rds')
-simulated_data_tool_1 <- readRDS('simulated_data_tool_1.rds')
-real_data_tool <- readRDS('real_data_tool.rds')
-real_data_tool_1 <- readRDS('real_data_tool_1.rds')
+simulated_data_tool <- readRDS('datasets/simulated_data_tool.rds')
+simulated_data_tool_1 <- readRDS('datasets/simulated_data_tool_1.rds')
+real_data_tool <- readRDS('datasets/real_data_tool.rds')
+real_data_tool_1 <- readRDS('datasets/real_data_tool_1.rds')
 
 
 
@@ -31,7 +33,7 @@ for(j in names(data[[i]])){
 }
 
 
-model_paga_1 <- read_rds('model_paga_1.rds')
+model_paga_1 <- read_rds('datasets/model_paga_1.rds')
 
 pdf(file = paste0('diagram/', 'camp_data', '_', 'model_paga', '.pdf'),width = 6,height = 6)
 plot_dimred(model_paga_1)
@@ -59,11 +61,11 @@ saveRDS(combined_list_simulated, 'combined_list_simulated.rds')
 saveRDS(combined_list_real, 'combined_list_real.rds')
 
 #get the index for metric
-yan_data_monocle <- readRDS('C:/Users/13598533/OneDrive - UTS/Desktop/cell_cycle_trajectory/cell_trajectory/dataset/yan_data_monocle.rds')
-nestorowa_data_monocle <- readRDS('C:/Users/13598533/OneDrive - UTS/Desktop/cell_cycle_trajectory/cell_trajectory/dataset/nestorowa_data_batch1_type_filter_no_stem_monocle.rds')
-camp_data_monocle <- readRDS('C:/Users/13598533/OneDrive - UTS/Desktop/cell_cycle_trajectory/cell_trajectory/dataset/camp1_data_batch1_monocle.rds')
-kowalczyk_data_monocle <- readRDS('C:/Users/13598533/OneDrive - UTS/Desktop/cell_cycle_trajectory/cell_trajectory/dataset/stem_mouse_C57BL6_old_monocle.rds')
-leng_data_monocle <- readRDS('C:/Users/13598533/OneDrive - UTS/Desktop/cell_cycle_trajectory/cell_trajectory/dataset/hesc_monocle.rds')
+yan_data_monocle <- readRDS('datasets/yan_data_monocle.rds')
+nestorowa_data_monocle <- readRDS('datasets/nestorowa_data_batch1_type_filter_no_stem_monocle.rds')
+camp_data_monocle <- readRDS('datasets/camp1_data_batch1_monocle.rds')
+kowalczyk_data_monocle <- readRDS('datasets/stem_mouse_C57BL6_old_monocle.rds')
+leng_data_monocle <- readRDS('datasets/hesc_monocle.rds')
 
 yan_index <- yan_data_monocle@phenoData@data[["index"]]
 nestorowa_index <- nestorowa_data_monocle@phenoData@data[["index"]]
@@ -71,18 +73,18 @@ camp_index <- camp_data_monocle@phenoData@data[["index"]]
 kowalczyk_index <- kowalczyk_data_monocle@phenoData@data[["index"]]
 leng_index <- leng_data_monocle@phenoData@data[["index"]]
 
-saveRDS(yan_index, 'yan_index.rds')
-saveRDS(nestorowa_index, 'nestorowa_index.rds')
-saveRDS(camp_index, 'camp_index.rds')
-saveRDS(kowalczyk_index, 'kowalczyk_index.rds')
-saveRDS(leng_index, 'leng_index.rds')
+saveRDS(yan_index, 'datasets/yan_index.rds')
+saveRDS(nestorowa_index, 'datasets/nestorowa_index.rds')
+saveRDS(camp_index, 'datasets/camp_index.rds')
+saveRDS(kowalczyk_index, 'datasets/kowalczyk_index.rds')
+saveRDS(leng_index, 'datasets/leng_index.rds')
 
 ###################################################################
-purity_df_simulated <- readRDS('purity_df_simulated.rds')
-purity_df_real <- readRDS('purity_df_real.rds')
+purity_df_simulated <- readRDS('datasets/purity_df_simulated.rds')
+purity_df_real <- readRDS('datasets/purity_df_real.rds')
 
-simulated_purity_score_old <- readRDS('simulated_purity_score_old')
-real_purity_score_old <- readRDS('real_purity_score_old')
+simulated_purity_score_old <- readRDS('datasets/simulated_purity_score_old')
+real_purity_score_old <- readRDS('datasets/real_purity_score_old')
 
 
 
@@ -177,8 +179,8 @@ purity_df_simulated$model_dbcti[c(8,9)] <- c(simulated_dbcti_purity[[5]], simula
 purity_df_simulated$model_dbcti[c(11,12)] <- c(simulated_dbcti_purity[[7]], simulated_dbcti_purity[[8]])
 purity_df_simulated$model_dbcti[c(14,15)] <- c(simulated_dbcti_purity[[9]], simulated_dbcti_purity[[10]])
 
-saveRDS(purity_df_simulated, 'purity_df_simulated.rds')
-saveRDS(purity_df_real, 'purity_df_real.rds')
+saveRDS(purity_df_simulated, 'datasets/purity_df_simulated.rds')
+saveRDS(purity_df_real, 'datasets/purity_df_real.rds')
 purity_df_simulated <- purity_df_simulated %>% 
   add_column(topology = unlist(lapply(str_split(purity_df_simulated$.id, '_'), function(x) x[1]))) 
 
@@ -196,8 +198,8 @@ purity_df_real_summary <- purity_df_real %>% group_by(.id) %>%
 purity_df_real_summary$.id <- c('Camp_data', 'Kowalczyk_data', 'Leng_data', 'Nestorowa_data', 'Yan_data')
 
 
-saveRDS(purity_df_simulated_summary, 'purity_df_simulated_summary.rds')
-saveRDS(purity_df_real_summary, 'purity_df_real_summary.rds')
+saveRDS(purity_df_simulated_summary, 'datasets/purity_df_simulated_summary.rds')
+saveRDS(purity_df_real_summary, 'datasets/purity_df_real_summary.rds')
 
 purity_simulated_ggplot <- purity_df_simulated_summary %>% pivot_longer(cols = !topology,names_to = 'Tool', values_to = 'Score')
 purity_real_ggplot <- purity_df_real_summary %>% pivot_longer(cols = !.id,names_to = 'Tool', values_to = 'Score')
