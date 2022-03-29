@@ -1,3 +1,4 @@
+setwd('..')
 library(dynplot)
 library(dbcti)
 library(monocle)
@@ -7,6 +8,7 @@ library(TSCAN)
 library(dyno)
 library(dyngen)
 library(purrr)
+library(dbcti)
 #backbone_bifurcating_cycle###############
 bifurcating_cycle <- function(x){
   set.seed(x)
@@ -119,44 +121,44 @@ linear <- function(x){
   return(out_linear)
 }
 #data import#############################
-bc_0 <- readRDS('out_bifurcating_cycle.rds')
-bc_2 <- readRDS('bc_2.rds')
-bc_3 <- readRDS('bc_3.rds')
+bc_0 <- readRDS('datasets/out_bifurcating_cycle.rds')
+bc_2 <- readRDS('datasets/bc_2.rds')
+bc_3 <- readRDS('datasets/bc_3.rds')
 
-bt_0 <- readRDS('out_binary_tree.rds')
-bt_2 <- readRDS('bt_2.rds')
-bt_3 <- readRDS('bt_3.rds')
+bt_0 <- readRDS('datasets/out_binary_tree.rds')
+bt_2 <- readRDS('datasets/bt_2.rds')
+bt_3 <- readRDS('datasets/bt_3.rds')
 
-l_0 <- readRDS('out_linear.rds')
-l_2 <- readRDS('l_2.rds')
-l_3<- readRDS('l_3.rds')
+l_0 <- readRDS('datasets/out_linear.rds')
+l_2 <- readRDS('datasets/l_2.rds')
+l_3<- readRDS('datasets/l_3.rds')
 
-c_0 <- readRDS('out_cycle.rds')
-c_2 <- readRDS('c_2.rds')
-c_3 <- readRDS('c_3.rds')
+c_0 <- readRDS('datasets/out_cycle.rds')
+c_2 <- readRDS('datasets/c_2.rds')
+c_3 <- readRDS('datasets/c_3.rds')
 
 
-d_0 <- readRDS('out_disconnected.rds')
-d_2 <- readRDS('d_2.rds')
-d_3 <- readRDS('d_3.rds')
+d_0 <- readRDS('datasets/out_disconnected.rds')
+d_2 <- readRDS('datasets/d_2.rds')
+d_3 <- readRDS('datasets/d_3.rds')
 
-leng_data <- readRDS('hescmt_for_new.rds')
-leng_index <- readRDS('hescsmsinfo_cycle_index_for_new.rds')
+leng_data <- readRDS('datasets/hescmt_for_new.rds')
+leng_index <- readRDS('datasets/hescsmsinfo_cycle_index_for_new.rds')
 
-kowalczyk_y_data <- readRDS('stem_mouse_C57BL6_data_young_for_new.rds')
-kowalczyk_y_index <- readRDS('stem_mouse_C57BL6_index_young_for_new.rds')
+kowalczyk_y_data <- readRDS('datasets/stem_mouse_C57BL6_data_young_for_new.rds')
+kowalczyk_y_index <- readRDS('datasets/stem_mouse_C57BL6_index_young_for_new.rds')
 
-kowalczyk_o_data <- readRDS('stem_mouse_C57BL6_data_old_for_new.rds')
-kowalczyk_o_index <- readRDS('stem_mouse_C57BL6_index_old_for_new.rds')
+kowalczyk_o_data <- readRDS('datasets/stem_mouse_C57BL6_data_old_for_new.rds')
+kowalczyk_o_index <- readRDS('datasets/stem_mouse_C57BL6_index_old_for_new.rds')
 
-camp_data <- readRDS('camp1_data_batch1_for_new.rds')
-camp_index <- readRDS('camp1_index_batch1_for_new.rds')
+camp_data <- readRDS('datasets/camp1_data_batch1_for_new.rds')
+camp_index <- readRDS('datasets/camp1_index_batch1_for_new.rds')
 
-nestorowa_data <- readRDS('nestorowa_data_batch1_type_filter_no_stem_for_new.rds')
-nestorowa_index <- readRDS('nestorowa_index_batch1_type_filter_no_stem_for_new.rds')
+nestorowa_data <- readRDS('datasets/nestorowa_data_batch1_type_filter_no_stem_for_new.rds')
+nestorowa_index <- readRDS('datasets/nestorowa_index_batch1_type_filter_no_stem_for_new.rds')
 
-yan_data <- readRDS('yan_data_for_new.rds')
-yan_index <- readRDS('yan_index_for_new.rds')
+yan_data <- readRDS('datasets/yan_data_for_new.rds')
+yan_index <- readRDS('datasets/yan_index_for_new.rds')
 
 
 ref_name <- c('bc_0','bc_2','bc_3','bt_0','bt_2','bt_3','l_0','l_2','l_3','c_0','c_2','c_3','d_0','d_2','d_3')
@@ -531,35 +533,35 @@ plot_data_monocle <- function(data){
 plot_data_monocle(simulated_monocle_plot_list)
 
 #########save rds
-saveRDS(bc_2_monocle, 'bc_2_monocle.rds')
-saveRDS(bc_3_monocle, 'bc_3_monocle.rds')
+saveRDS(bc_2_monocle, 'datasets/bc_2_monocle.rds')
+saveRDS(bc_3_monocle, 'datasets/bc_3_monocle.rds')
 
-saveRDS(c_2_monocle, 'c_2_monocle.rds')
-saveRDS(c_3_monocle, 'c_3_monocle.rds')
+saveRDS(c_2_monocle, 'datasets/c_2_monocle.rds')
+saveRDS(c_3_monocle, 'datasets/c_3_monocle.rds')
 
-saveRDS(bt_2_monocle, 'bt_2_monocle.rds')
-saveRDS(bt_3_monocle, 'bt_3_monocle.rds')
+saveRDS(bt_2_monocle, 'datasets/bt_2_monocle.rds')
+saveRDS(bt_3_monocle, 'datasets/bt_3_monocle.rds')
 
-saveRDS(d_2_monocle, 'd_2_monocle.rds')
-saveRDS(d_3_monocle, 'd_3_monocle.rds')
+saveRDS(d_2_monocle, 'datasets/d_2_monocle.rds')
+saveRDS(d_3_monocle, 'datasets/d_3_monocle.rds')
 
-saveRDS(l_2_monocle, 'l_2_monocle.rds')
-saveRDS(l_3_monocle, 'l_3_monocle.rds')
+saveRDS(l_2_monocle, 'datasets/l_2_monocle.rds')
+saveRDS(l_3_monocle, 'datasets/l_3_monocle.rds')
 
-saveRDS(bc_2_dbcti, 'bc_2_dbcti.rds')
-saveRDS(bc_3_dbcti, 'bc_3_dbcti.rds')
+saveRDS(bc_2_dbcti, 'datasets/bc_2_dbcti.rds')
+saveRDS(bc_3_dbcti, 'datasets/bc_3_dbcti.rds')
 
-saveRDS(c_2_dbcti, 'c_2_dbcti.rds')
-saveRDS(c_3_dbcti, 'c_3_dbcti.rds')
+saveRDS(c_2_dbcti, 'datasets/c_2_dbcti.rds')
+saveRDS(c_3_dbcti, 'datasets/c_3_dbcti.rds')
 
-saveRDS(bt_2_dbcti, 'bt_2_dbcti.rds')
-saveRDS(bt_3_dbcti, 'bt_3_dbcti.rds')
+saveRDS(bt_2_dbcti, 'datasets/bt_2_dbcti.rds')
+saveRDS(bt_3_dbcti, 'datasets/bt_3_dbcti.rds')
 
-saveRDS(d_2_dbcti, 'd_2_dbcti.rds')
-saveRDS(d_3_dbcti, 'd_3_dbcti.rds')
+saveRDS(d_2_dbcti, 'datasets/d_2_dbcti.rds')
+saveRDS(d_3_dbcti, 'datasets/d_3_dbcti.rds')
 
-saveRDS(l_2_dbcti, 'l_2_dbcti.rds')
-saveRDS(l_3_dbcti, 'l_3_dbcti.rds')
+saveRDS(l_2_dbcti, 'datasets/l_2_dbcti.rds')
+saveRDS(l_3_dbcti, 'datasets/l_3_dbcti.rds')
 ###############################################################################################
 monocle_infer <- function(data){
   gene <- as.data.frame(data[, 1])

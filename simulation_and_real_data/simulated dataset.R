@@ -1,7 +1,11 @@
+library(dbcti)
 library(tidyverse)
 library(dyngen)
 library(dyno)
-path = 'Data/cell_trajectory/trajectory_inference/plot/simulated_dataset_comparison/'
+
+# path = 'Data/cell_trajectory/trajectory_inference/plot/simulated_dataset_comparison/'
+setwd('..')
+path = ''
 #backbone_bifurcating_cycle###############
 backbone_bifurcating_cycle <- backbone_bifurcating_cycle()
 config_bifurcating_cycle <- 
@@ -35,9 +39,9 @@ bifurcating_cycle_data = dataset_bifurcating_cycle_df[apply(dataset_bifurcating_
 bifurcating_cycle_index = dataset_bifurcating_cycle[["progressions"]] #cell info
 bifurcating_cycle_loc_dimred = dataset_bifurcating_cycle[["dimred"]] #cell location
 
-saveRDS(bifurcating_cycle_data, file = 'Data/cell_trajectory/dataset/bifurcating_cycle_data.rds')
-saveRDS(bifurcating_cycle_index, file = 'Data/cell_trajectory/dataset/bifurcating_cycle_index.rds')
-saveRDS(bifurcating_cycle_loc_dimred, file = 'Data/cell_trajectory/dataset/bifurcating_cycle_loc_dimred.rds')
+saveRDS(bifurcating_cycle_data, file = 'datasets/bifurcating_cycle_data.rds')
+saveRDS(bifurcating_cycle_index, file = 'datasets/bifurcating_cycle_index.rds')
+saveRDS(bifurcating_cycle_loc_dimred, file = 'datasets/bifurcating_cycle_loc_dimred.rds')
 
 
 
@@ -77,9 +81,9 @@ cycle_data = dataset_cycle_df[apply(dataset_cycle_df, 1, sum) != 0, ]
 cycle_index = dataset_cycle[["progressions"]] #cell info
 cycle_loc_dimred = dataset_cycle[["dimred"]] #cell location
 
-saveRDS(cycle_data, file = 'Data/cell_trajectory/dataset/cycle_data.rds')
-saveRDS(cycle_index, file = 'Data/cell_trajectory/dataset/cycle_index.rds')
-saveRDS(cycle_loc_dimred, file = 'Data/cell_trajectory/dataset/cycle_loc_dimred.rds')
+saveRDS(cycle_data, file = 'datasets/cycle_data.rds')
+saveRDS(cycle_index, file = 'datasets/cycle_index.rds')
+saveRDS(cycle_loc_dimred, file = 'datasets/cycle_loc_dimred.rds')
 
 #backbone_disconnected###############
 backbone_disconnected <- backbone_disconnected()
@@ -114,9 +118,9 @@ disconnected_data = dataset_disconnected_df[apply(dataset_disconnected_df, 1, su
 disconnected_index = dataset_disconnected[["progressions"]] #cell info
 disconnected_loc_dimred = dataset_disconnected[["dimred"]] #cell location
 
-saveRDS(disconnected_data, file = 'Data/cell_trajectory/dataset/disconnected_data.rds')
-saveRDS(disconnected_index, file = 'Data/cell_trajectory/dataset/disconnected_index.rds')
-saveRDS(disconnected_loc_dimred, file = 'Data/cell_trajectory/dataset/disconnected_loc_dimred.rds')
+saveRDS(disconnected_data, file = 'dataset/disconnected_data.rds')
+saveRDS(disconnected_index, file = 'dataset/disconnected_index.rds')
+saveRDS(disconnected_loc_dimred, file = 'dataset/disconnected_loc_dimred.rds')
 
 #backbone_binary_tree###############
 backbone_binary_tree <- backbone_binary_tree(
@@ -155,9 +159,9 @@ binary_tree_data = dataset_binary_tree_df[apply(dataset_binary_tree_df, 1, sum) 
 binary_tree_index = dataset_binary_tree[["progressions"]] #cell info
 binary_tree_loc_dimred = dataset_binary_tree[["dimred"]] #cell location
 
-saveRDS(binary_tree_data, file = 'Data/cell_trajectory/dataset/binary_tree_data.rds')
-saveRDS(binary_tree_index, file = 'Data/cell_trajectory/dataset/binary_tree_index.rds')
-saveRDS(binary_tree_loc_dimred, file = 'Data/cell_trajectory/dataset/binary_tree_loc_dimred.rds')
+saveRDS(binary_tree_data, file = 'dataset/binary_tree_data.rds')
+saveRDS(binary_tree_index, file = 'dataset/binary_tree_index.rds')
+saveRDS(binary_tree_loc_dimred, file = 'dataset/binary_tree_loc_dimred.rds')
 
 
 
@@ -193,6 +197,6 @@ linear_data = dataset_linear_df[apply(dataset_linear_df, 1, sum) != 0, ]
 linear_index = dataset_linear[["progressions"]] #cell info
 linear_loc_dimred = dataset_linear[["dimred"]] #cell location
 
-saveRDS(linear_data, file = 'Data/cell_trajectory/dataset/linear_data.rds')
-saveRDS(linear_index, file = 'Data/cell_trajectory/dataset/linear_index.rds')
-saveRDS(linear_loc_dimred, file = 'Data/cell_trajectory/dataset/linear_loc_dimred.rds')
+saveRDS(linear_data, file = 'dataset/linear_data.rds')
+saveRDS(linear_index, file = 'dataset/linear_index.rds')
+saveRDS(linear_loc_dimred, file = 'dataset/linear_loc_dimred.rds')

@@ -1,15 +1,16 @@
-source(file = 'Data/cell_trajectory/rcode/package_function.R')
-source('Data/cell_trajectory/rcode/plot_tools_function_upload.R')
+setwd('..')
+source('simulation_and_real_data/plot_tools_function_upload.R')
 library(SCORPIUS)
 library(monocle)
 library(TSCAN)
 library(igraph)
 library(tidyverse)
+library(dbcti)
 
 #bifurcating_cycle##########################
-bifurcating_cycle_data <- readRDS(file = 'Data/cell_trajectory/dataset/bifurcating_cycle_data.rds')
-bifurcating_cycle_index <- readRDS(file = 'Data/cell_trajectory/dataset/bifurcating_cycle_index.rds')
-bifurcating_cycle_loc_dimred <- readRDS(file = 'Data/cell_trajectory/dataset/bifurcating_cycle_loc_dimred.rds')
+bifurcating_cycle_data <- readRDS(file = 'datasets/bifurcating_cycle_data.rds')
+bifurcating_cycle_index <- readRDS(file = 'datasets/bifurcating_cycle_index.rds')
+bifurcating_cycle_loc_dimred <- readRDS(file = 'datasets/bifurcating_cycle_loc_dimred.rds')
 
 #1. monocle###############
 bifurcating_cycle_gene <- as.data.frame(bifurcating_cycle_data[, 1])
@@ -29,7 +30,7 @@ bifurcating_cycle_monocle@phenoData@data$index = factor(t(bifurcating_cycle_inde
 plot_cell_trajectory(bifurcating_cycle_monocle)
 plot_cell_trajectory(bifurcating_cycle_monocle, color_by = "Pseudotime")
 
-saveRDS(bifurcating_cycle_monocle, 'Data/cell_trajectory/dataset/bifurcating_cycle_monocle.rds')
+saveRDS(bifurcating_cycle_monocle, 'datasets/bifurcating_cycle_monocle.rds')
 
 
 #2. tscan###############
@@ -40,8 +41,8 @@ bifurcating_cycle_tscan_o <- TSCANorder(bifurcating_cycle_tscan_c)
 #eval
 plotmclust(bifurcating_cycle_tscan_c)
 
-saveRDS(bifurcating_cycle_tscan_c, 'Data/cell_trajectory/dataset/bifurcating_cycle_tscan_c.rds')
-saveRDS(bifurcating_cycle_tscan_o, 'Data/cell_trajectory/dataset/bifurcating_cycle_tscan_o.rds')
+saveRDS(bifurcating_cycle_tscan_c, 'datasets/bifurcating_cycle_tscan_c.rds')
+saveRDS(bifurcating_cycle_tscan_o, 'datasets/bifurcating_cycle_tscan_o.rds')
 
 #3. SCORPIUS###############
 bifurcating_cycle_group = bifurcating_cycle_index[, 2]
@@ -53,8 +54,8 @@ bifurcating_cycle_sco_t <- SCORPIUS::infer_trajectory(bifurcating_cycle_sco_s)
 draw_trajectory_plot(bifurcating_cycle_sco_s, bifurcating_cycle_group, bifurcating_cycle_sco_t$path, contour = TRUE)
 draw_trajectory_plot(bifurcating_cycle_sco_s, factor(t(bifurcating_cycle_index[, 2])), bifurcating_cycle_sco_t$path, contour = TRUE)
 
-saveRDS(bifurcating_cycle_sco_s, 'Data/cell_trajectory/dataset/bifurcating_cycle_sco_s.rds')
-saveRDS(bifurcating_cycle_sco_t, 'Data/cell_trajectory/dataset/bifurcating_cycle_sco_t.rds')
+saveRDS(bifurcating_cycle_sco_s, 'datasets/bifurcating_cycle_sco_s.rds')
+saveRDS(bifurcating_cycle_sco_t, 'datasets/bifurcating_cycle_sco_t.rds')
 
 
 #5. tool use###########################
@@ -76,13 +77,13 @@ plot(test_bifurcating_cycle@trajectory_plot$plot)
 eval_bifurcating_cycle <- plot_index(index = factor(t(bifurcating_cycle_index[, 2])), trajectory = test_bifurcating_cycle@trajectory, connection_matrix = test_bifurcating_cycle@connect_cluster$cluster_connection)
 plot(eval_bifurcating_cycle$plot)
   
-saveRDS(test_bifurcating_cycle, 'Data/cell_trajectory/dataset/test_bifurcating_cycle.rds')
+saveRDS(test_bifurcating_cycle, 'datasets/test_bifurcating_cycle.rds')
 
 
 #cycle##########################
-cycle_data <- readRDS(file = 'Data/cell_trajectory/dataset/cycle_data.rds')
-cycle_index <- readRDS(file = 'Data/cell_trajectory/dataset/cycle_index.rds')
-cycle_loc_dimred <- readRDS(file = 'Data/cell_trajectory/dataset/cycle_loc_dimred.rds')
+cycle_data <- readRDS(file = 'datasets/cycle_data.rds')
+cycle_index <- readRDS(file = 'datasets/cycle_index.rds')
+cycle_loc_dimred <- readRDS(file = 'datasets/cycle_loc_dimred.rds')
 
 #1. monocle###############
 cycle_gene <- as.data.frame(cycle_data[, 1])
@@ -102,7 +103,7 @@ cycle_monocle@phenoData@data$index = factor(t(cycle_index[, 2]))
 plot_cell_trajectory(cycle_monocle)
 plot_cell_trajectory(cycle_monocle, color_by = "Pseudotime")
 
-saveRDS(cycle_monocle, 'Data/cell_trajectory/dataset/cycle_monocle.rds')
+saveRDS(cycle_monocle, 'datasets/cycle_monocle.rds')
 
 #2. tscan###############
 cycle_tscan_p <- preprocess(cycle_data, minexpr_percent = 0.01)
@@ -112,8 +113,8 @@ cycle_tscan_o <- TSCANorder(cycle_tscan_c)
 #eval
 plotmclust(cycle_tscan_c)
 
-saveRDS(cycle_tscan_c, 'Data/cell_trajectory/dataset/cycle_tscan_c.rds')
-saveRDS(cycle_tscan_o, 'Data/cell_trajectory/dataset/cycle_tscan_o.rds')
+saveRDS(cycle_tscan_c, 'datasets/cycle_tscan_c.rds')
+saveRDS(cycle_tscan_o, 'datasets/cycle_tscan_o.rds')
 
 #3. SCORPIUS###############
 cycle_group = cycle_index[, 2]
@@ -125,8 +126,8 @@ cycle_sco_t <- SCORPIUS::infer_trajectory(cycle_sco_s)
 draw_trajectory_plot(cycle_sco_s, cycle_group, cycle_sco_t$path, contour = TRUE)
 draw_trajectory_plot(cycle_sco_s, factor(t(cycle_index[, 2])), cycle_sco_t$path, contour = TRUE)
 
-saveRDS(cycle_sco_s, 'Data/cell_trajectory/dataset/cycle_sco_s.rds')
-saveRDS(cycle_sco_t, 'Data/cell_trajectory/dataset/cycle_sco_t.rds')
+saveRDS(cycle_sco_s, 'datasets/cycle_sco_s.rds')
+saveRDS(cycle_sco_t, 'datasets/cycle_sco_t.rds')
 
 #5. tool (use)###########################
 cycle_data <- as.data.frame(cycle_data)
@@ -147,12 +148,12 @@ plot(test_cycle@trajectory_plot$plot)
 eval_cycle <- plot_index(index = factor(t(cycle_index[, 2])), trajectory = test_cycle@trajectory, connection_matrix = test_cycle@connect_cluster$cluster_connection)
 plot(eval_cycle$plot)
 
-saveRDS(test_cycle, 'Data/cell_trajectory/dataset/test_cycle.rds')
+saveRDS(test_cycle, 'datasets/test_cycle.rds')
 
 #disconnected##########################
-disconnected_data <- readRDS(file = 'Data/cell_trajectory/dataset/disconnected_data.rds')
-disconnected_index <- readRDS(file = 'Data/cell_trajectory/dataset/disconnected_index.rds')
-disconnected_loc_dimred <- readRDS(file = 'Data/cell_trajectory/dataset/disconnected_loc_dimred.rds')
+disconnected_data <- readRDS(file = 'datasets/disconnected_data.rds')
+disconnected_index <- readRDS(file = 'datasets/disconnected_index.rds')
+disconnected_loc_dimred <- readRDS(file = 'datasets/disconnected_loc_dimred.rds')
 
 #1. monocle###############
 disconnected_gene <- as.data.frame(disconnected_data[, 1])
@@ -172,7 +173,7 @@ disconnected_monocle@phenoData@data$index = factor(t(disconnected_index[, 2]))
 plot_cell_trajectory(disconnected_monocle)
 plot_cell_trajectory(disconnected_monocle, color_by = "Pseudotime")
 
-saveRDS(disconnected_monocle, 'Data/cell_trajectory/dataset/disconnected_monocle.rds')
+saveRDS(disconnected_monocle, 'datasets/disconnected_monocle.rds')
 
 #2. tscan###############
 disconnected_tscan_p <- preprocess(disconnected_data, minexpr_percent = 0.01)
@@ -182,8 +183,8 @@ disconnected_tscan_o <- TSCANorder(disconnected_tscan_c)
 #eval
 plotmclust(disconnected_tscan_c)
 
-saveRDS(disconnected_tscan_c, 'Data/cell_trajectory/dataset/disconnected_tscan_c.rds')
-saveRDS(disconnected_tscan_o, 'Data/cell_trajectory/dataset/disconnected_tscan_o.rds')
+saveRDS(disconnected_tscan_c, 'datasets/disconnected_tscan_c.rds')
+saveRDS(disconnected_tscan_o, 'datasets/disconnected_tscan_o.rds')
 
 #3. SCORPIUS###############
 disconnected_group = disconnected_index[, 2]
@@ -195,8 +196,8 @@ disconnected_sco_t <- SCORPIUS::infer_trajectory(disconnected_sco_s)
 draw_trajectory_plot(disconnected_sco_s, disconnected_group, disconnected_sco_t$path, contour = TRUE)
 draw_trajectory_plot(disconnected_sco_s, factor(t(disconnected_index[, 2])), disconnected_sco_t$path, contour = TRUE)
 
-saveRDS(disconnected_sco_s, 'Data/cell_trajectory/dataset/disconnected_sco_s.rds')
-saveRDS(disconnected_sco_t, 'Data/cell_trajectory/dataset/disconnected_sco_t.rds')
+saveRDS(disconnected_sco_s, 'datasets/disconnected_sco_s.rds')
+saveRDS(disconnected_sco_t, 'datasets/disconnected_sco_t.rds')
 
 #5. tool use###########################
 disconnected_data <- as.data.frame(disconnected_data)
@@ -217,12 +218,12 @@ plot(test_disconnected@trajectory_plot$plot)
 eval_disconnected <- plot_index(index = factor(t(disconnected_index[, 2])), trajectory = test_disconnected@trajectory, connection_matrix = test_disconnected@connect_cluster$cluster_connection)
 plot(eval_disconnected$plot)
 
-saveRDS(test_disconnected, 'Data/cell_trajectory/dataset/test_disconnected.rds')
+saveRDS(test_disconnected, 'datasets/test_disconnected.rds')
 
 #binary_tree##########################  
-binary_tree_data <- readRDS(file = 'Data/cell_trajectory/dataset/binary_tree_data.rds')
-binary_tree_index <- readRDS(file = 'Data/cell_trajectory/dataset/binary_tree_index.rds')
-binary_tree_loc_dimred <- readRDS(file = 'Data/cell_trajectory/dataset/binary_tree_loc_dimred.rds')
+binary_tree_data <- readRDS(file = 'datasets/binary_tree_data.rds')
+binary_tree_index <- readRDS(file = 'datasets/binary_tree_index.rds')
+binary_tree_loc_dimred <- readRDS(file = 'datasets/binary_tree_loc_dimred.rds')
 
 #1. monocle###############
 binary_tree_gene <- as.data.frame(binary_tree_data[, 1])
@@ -243,7 +244,7 @@ binary_tree_monocle@phenoData@data$index = factor(t(binary_tree_index[, 2]))
 plot_cell_trajectory(binary_tree_monocle)
 plot_cell_trajectory(binary_tree_monocle, color_by = "Pseudotime")
 
-saveRDS(binary_tree_monocle, 'Data/cell_trajectory/dataset/binary_tree_monocle.rds')
+saveRDS(binary_tree_monocle, 'datasets/binary_tree_monocle.rds')
 
 #2. tscan###############
 binary_tree_tscan_p <- preprocess(binary_tree_data, minexpr_percent = 0.01)
@@ -253,8 +254,8 @@ binary_tree_tscan_o <- TSCANorder(binary_tree_tscan_c)
 #eval
 plotmclust(binary_tree_tscan_c)
 
-saveRDS(binary_tree_tscan_c, 'Data/cell_trajectory/dataset/binary_tree_tscan_c.rds')
-saveRDS(binary_tree_tscan_o, 'Data/cell_trajectory/dataset/binary_tree_tscan_o.rds')
+saveRDS(binary_tree_tscan_c, 'datasets/binary_tree_tscan_c.rds')
+saveRDS(binary_tree_tscan_o, 'datasets/binary_tree_tscan_o.rds')
 
 #3. SCORPIUS###############
 binary_tree_group = binary_tree_index[, 2]
@@ -266,8 +267,8 @@ binary_tree_sco_t <- SCORPIUS::infer_trajectory(binary_tree_sco_s)
 draw_trajectory_plot(binary_tree_sco_s, binary_tree_group, binary_tree_sco_t$path, contour = TRUE)
 draw_trajectory_plot(binary_tree_sco_s, factor(t(binary_tree_index[, 2])), binary_tree_sco_t$path, contour = TRUE)
 
-saveRDS(binary_tree_sco_s, 'Data/cell_trajectory/dataset/binary_tree_sco_s.rds')
-saveRDS(binary_tree_sco_t, 'Data/cell_trajectory/dataset/binary_tree_sco_t.rds')
+saveRDS(binary_tree_sco_s, 'datasets/binary_tree_sco_s.rds')
+saveRDS(binary_tree_sco_t, 'datasets/binary_tree_sco_t.rds')
 
 #5. tool use###########################
 binary_tree_data <- as.data.frame(binary_tree_data)
@@ -288,12 +289,12 @@ plot(test_binary_tree@trajectory_plot$plot)
 eval_binary_tree <- plot_index(index = factor(t(binary_tree_index[, 2])), trajectory = test_binary_tree@trajectory, connection_matrix = test_binary_tree@connect_cluster$cluster_connection)
 plot(eval_binary_tree$plot)
 
-saveRDS(test_binary_tree, 'Data/cell_trajectory/dataset/test_binary_tree.rds')
+saveRDS(test_binary_tree, 'datasets/test_binary_tree.rds')
 
 #linear##########################  
-linear_data <- readRDS(file = 'Data/cell_trajectory/dataset/linear_data.rds')
-linear_index <- readRDS(file = 'Data/cell_trajectory/dataset/linear_index.rds')
-linear_loc_dimred <- readRDS(file = 'Data/cell_trajectory/dataset/linear_loc_dimred.rds')
+linear_data <- readRDS(file = 'datasets/linear_data.rds')
+linear_index <- readRDS(file = 'datasets/linear_index.rds')
+linear_loc_dimred <- readRDS(file = 'datasets/linear_loc_dimred.rds')
 
 #1. monocle###############
 linear_gene <- as.data.frame(linear_data[, 1])
@@ -312,7 +313,7 @@ linear_monocle@phenoData@data$index = factor(t(linear_index[, 2]))
 plot_cell_trajectory(linear_monocle)
 plot_cell_trajectory(linear_monocle, color_by = "Pseudotime")
 
-saveRDS(linear_monocle, 'Data/cell_trajectory/dataset/test_binary_tree.rds')
+saveRDS(linear_monocle, 'datasets/test_binary_tree.rds')
 
 #2. tscan###############
 linear_tscan_p <- preprocess(linear_data, minexpr_percent = 0.01)
@@ -322,8 +323,8 @@ linear_tscan_o <- TSCANorder(linear_tscan_c)
 #eval
 plotmclust(linear_tscan_c)
 
-saveRDS(linear_tscan_c, 'Data/cell_trajectory/dataset/linear_tscan_c.rds')
-saveRDS(linear_tscan_o, 'Data/cell_trajectory/dataset/linear_tscan_o.rds')
+saveRDS(linear_tscan_c, 'datasets/linear_tscan_c.rds')
+saveRDS(linear_tscan_o, 'datasets/linear_tscan_o.rds')
 
 #3. SCORPIUS###############
 linear_group = linear_index[, 2]
@@ -335,8 +336,8 @@ linear_sco_t <- SCORPIUS::infer_trajectory(linear_sco_s)
 draw_trajectory_plot(linear_sco_s, linear_group, linear_sco_t$path, contour = TRUE)
 draw_trajectory_plot(linear_sco_s, factor(t(linear_index[, 2])), linear_sco_t$path, contour = TRUE)
 
-saveRDS(linear_sco_s, 'Data/cell_trajectory/dataset/linear_sco_s.rds')
-saveRDS(linear_sco_t, 'Data/cell_trajectory/dataset/linear_sco_t.rds')
+saveRDS(linear_sco_s, 'datasets/linear_sco_s.rds')
+saveRDS(linear_sco_t, 'datasets/linear_sco_t.rds')
 
 #5. tool use###########################
 linear_data <- as.data.frame(linear_data)
@@ -357,10 +358,10 @@ plot(test_linear@trajectory_plot$plot)
 eval_linear <- plot_index(index = factor(t(linear_index[, 2])), trajectory = test_linear@trajectory, connection_matrix = test_linear@connect_cluster$cluster_connection)
 plot(eval_linear$plot)
 
-saveRDS(test_linear, 'Data/cell_trajectory/dataset/test_linear.rds')
+saveRDS(test_linear, 'datasets/test_linear.rds')
 
 #plot and measurement##########################################################
-path = '/home/tialan/Data/cell_trajectory/trajectory_inference/plot/simulated_dataset_comparison/'
+path = ''
 #p  bifurcating_cycle##########################
 #p1. monocle###########
 
