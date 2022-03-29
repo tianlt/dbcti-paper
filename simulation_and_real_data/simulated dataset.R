@@ -4,7 +4,7 @@ library(dyngen)
 library(dyno)
 
 # path = 'Data/cell_trajectory/trajectory_inference/plot/simulated_dataset_comparison/'
-setwd('..')
+# setwd('..')
 path = ''
 #backbone_bifurcating_cycle###############
 backbone_bifurcating_cycle <- backbone_bifurcating_cycle()

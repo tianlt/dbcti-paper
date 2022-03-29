@@ -1,4 +1,4 @@
-setwd('..')
+# setwd('..')
 library(dynplot)
 library(dbcti)
 library(monocle)

@@ -1,6 +1,6 @@
 #hesc(use)#########################
 library(dbcti)
-setwd('..')
+# setwd('..')
 hescmt<-readRDS('datasets/hescmt.rds')
 hescmt<-hescmt[, 214:460]
 hescsmsinfo_cycle_index<-readRDS('datasets/hescsmsinfo_cycle_index.rds')

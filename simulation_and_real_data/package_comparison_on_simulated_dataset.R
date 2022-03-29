@@ -1,4 +1,4 @@
-setwd('..')
+# setwd('..')
 source('simulation_and_real_data/plot_tools_function_upload.R')
 library(SCORPIUS)
 library(monocle)
