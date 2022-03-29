@@ -1,4 +1,4 @@
-setwd('..')
+# setwd('..')
 library(monocle)
 library(TSCAN)
 library(SCORPIUS)
