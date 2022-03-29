@@ -1,14 +1,14 @@
-source(file = 'package_function.R')
-source('Data/cell_trajectory/rcode/plot_tools_function_upload.R')
+library(dbcti)
+source('simulation_and_real_data/plot_tools_function_upload.R')
 library(ggplot2)
 library(tidyverse)
-path = 'C:/Users/13598533/Desktop/cell_cycle_trajectory/cell_trajectory/trajectory_inference/plot/case/'
+path = ''
 set.seed(122)
 
 #data
-darmanisnormalizeddata<-read.csv('C:/Users/13598533/Desktop/cell_cycle_trajectory/cell_trajectory/dataset/GBM_normalized_gene_counts.csv',sep = '')
-darmanisrawdata<-read.csv('C:/Users/13598533/Desktop/cell_cycle_trajectory/cell_trajectory/dataset//GBM_raw_gene_counts.csv',sep = '')
-darmanismetadata<-read.csv('C:/Users/13598533/Desktop/cell_cycle_trajectory/cell_trajectory/dataset/GBM_metadata.csv',sep = '')
+darmanisnormalizeddata<-read.csv('GBM_normalized_gene_counts.csv',sep = '')
+darmanisrawdata<-read.csv('GBM_raw_gene_counts.csv',sep = '')
+darmanismetadata<-read.csv('GBM_metadata.csv',sep = '')
 
 cellloc<-darmanismetadata$Location
 patient<-darmanismetadata$Sample.name
@@ -87,7 +87,7 @@ annotations_orgDb <- annotations_orgDb[which(duplicated(annotations_orgDb$SYMBOL
 
 
 
-annotation_ahb <- read.csv('C:/Users/13598533/Documents/Functional_analysis/Functional_analysis/data/annotations_ahb.txt')
+annotation_ahb <- read.csv('datasets/annotations_ahb.txt')
 de_bts2_all_tb_pos_ahb <- inner_join(de_bts2_all_tb_pos, annotation_ahb, by = c('gene'='gene_name'))
 de_bts2_bk_gene <- tibble(gene = de_bts2_bk_gene)
 de_bts2_bk_gene_ahb <- inner_join(de_bts2_bk_gene, annotation_ahb, by = c('gene'='gene_name'))

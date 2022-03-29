@@ -1,16 +1,16 @@
 library(tidyverse)
 library(GEOquery)
 library(clusterProfiler)
-source(file = "C:/Users/13598533/Desktop/cell_cycle_trajectory/cell_trajectory/rcode/package_function.R")
-path <- 'C:/Users/13598533/Desktop/cell_cycle_trajectory/cell_trajectory/data/'
-path_case = 'C:/Users/13598533/Desktop/cell_cycle_trajectory/cell_trajectory/trajectory_inference/plot/case/'
+library(dbcti)
+path <- ''
+path_case = ''
 
 #annotation data
 cell_markers <- vroom::vroom('http://bio-bigdata.hrbmu.edu.cn/CellMarker/download/Human_cell_markers.txt') %>% 
   tidyr::unite("cellMarker", tissueType, cancerType, cellName, sep=", ") %>% 
   dplyr::select(cellMarker, geneID) %>%
   dplyr::mutate(geneID = strsplit(geneID, ', '))
-annotation_ahb <- read.csv('C:/Users/13598533/Documents/Functional_analysis/Functional_analysis/data/annotations_ahb.txt')
+annotation_ahb <- read.csv('datasets/annotations_ahb.txt')
 
 
 x=getGEO(filename=paste0(path, 'GSE171524_series_matrix.txt'), getGPL = FALSE) %>% data.frame() %>%
@@ -169,7 +169,7 @@ annotations_orgDb <- AnnotationDbi::select(org.Hs.eg.db, # database
 
 annotations_orgDb <- annotations_orgDb[which(duplicated(annotations_orgDb$SYMBOL) == FALSE), ]
 
-annotation_ahb <- read.csv('C:/Users/13598533/Documents/Functional_analysis/Functional_analysis/data/annotations_ahb.txt')
+# annotation_ahb <- read.csv('C:/Users/13598533/Documents/Functional_analysis/Functional_analysis/data/annotations_ahb.txt')
 
 de_L01cov_3_4_ahb <- lapply(de_L01cov_3_4_tibble, inner_join, y = annotation_ahb, by = c('gene'='gene_name'))
 
